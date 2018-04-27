@@ -4,6 +4,7 @@ import BioCard from '../components/BioCard';
 // import AppContent from '../components/AppContent';
 import logo from '../logo.svg';
 import ReactVisChart from '../components/ReactVis';
+// import tableau from 'tableau-react';
 
 const { Header, Sider, Content } = Layout;
 

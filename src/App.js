@@ -7,13 +7,13 @@ import Canvas from './components/Canvas';
 // const { SubMenu } = Menu;
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <Canvas/>
-      </div>
-    );
-  }
+	render() {
+		return (
+			<div className="App">
+				<Canvas/>
+			</div>
+		);
+	}
 }
 
 export default App;
