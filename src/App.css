@@ -58,3 +58,7 @@
   height: 500px;
   /* border-radius: 3px; */
 }
+
+.muidocs-icon-custom-github:before {
+  content: "\e625";
+}
