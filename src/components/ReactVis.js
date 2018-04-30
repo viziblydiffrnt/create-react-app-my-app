@@ -18,14 +18,16 @@ class ReactVisChart extends Component{
 		];
 
 		return(
-			<div>
-				<XYPlot height={500} width={500}>
-					<VerticalGridLines />
-					<HorizontalGridLines />
-					<XAxis/>
-					<YAxis/>
-					<LineSeries data={data}/>
-				</XYPlot>
+			<div className="outer-div">
+				<div className="inner-div">
+					<XYPlot height={500} width={500}>
+						<VerticalGridLines />
+						<HorizontalGridLines />
+						<XAxis/>
+						<YAxis/>
+						<LineSeries data={data}/>
+					</XYPlot>
+				</div>
 			</div>
 		);
 	}

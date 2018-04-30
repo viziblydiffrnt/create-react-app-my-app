@@ -59,6 +59,12 @@
   /* border-radius: 3px; */
 }
 
-.muidocs-icon-custom-github:before {
-  content: "\e625";
+.outer-div{
+  padding: 135px;
+}
+
+.inner-div{
+  margin: auto;
+  height: 500px;
+  width: 500px;
 }

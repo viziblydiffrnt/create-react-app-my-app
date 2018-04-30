@@ -30,10 +30,15 @@ const style = {
 const paperStyle = {
     height: 800,
     width: 1200,
-    margin: 20,
+    marginLeft: 250,
     textAlign: 'center',
     display: 'inline-block',
 };
+
+const bottomNavStyle = {
+    height: 20,
+    marginLeft: 100,
+}
 
 class BioCard extends Component {
 	render() {
@@ -98,38 +103,38 @@ class BottomNav extends Component {
 
     render() {
         return(
-            <BottomNavigation selectedIndex={this.state.selectedIndex}>
-            <BottomNavigationItem 
-                label="Vizibly Diffrnt"
-                icon={<Icon type="home"/>}  
-                style={{fontSize: 24}}  
-                onClick={()=> {
-                    this.select(0);
-                    // this.renderContent();
-                }}
-            >
-            </BottomNavigationItem>
-            <BottomNavigationItem 
-                label="React Vis"
-                icon={<Icon type="line-chart"/>}    
-                style={{fontSize: 24}}  
-                onClick={()=> {
-                    this.select(1);
-                    // this.renderContent();
-                }}
-            >
-            </BottomNavigationItem>
-            <BottomNavigationItem 
-                label="Tableau"
-                icon={<Icon type="dot-chart"/>}    
-                style={{fontSize: 24}}  
-                onClick={()=> {
-                    this.select(2);
-                    // this.renderContent();
-                }}
-            >
-            </BottomNavigationItem>
-        </BottomNavigation>
+                <BottomNavigation selectedIndex={this.state.selectedIndex} style={bottomNavStyle}>
+                <BottomNavigationItem 
+                    label="Vizibly Diffrnt"
+                    icon={<Icon type="home"/>}  
+                    style={{fontSize: 24}}  
+                    onClick={()=> {
+                        this.select(0);
+                        // this.renderContent();
+                    }}
+                >
+                </BottomNavigationItem>
+                <BottomNavigationItem 
+                    label="React Vis"
+                    icon={<Icon type="line-chart"/>}    
+                    style={{fontSize: 24}}  
+                    onClick={()=> {
+                        this.select(1);
+                        // this.renderContent();
+                    }}
+                >
+                </BottomNavigationItem>
+                <BottomNavigationItem 
+                    label="Tableau"
+                    icon={<Icon type="dot-chart"/>}    
+                    style={{fontSize: 24}}  
+                    onClick={()=> {
+                        this.select(2);
+                        // this.renderContent();
+                    }}
+                >
+                </BottomNavigationItem>
+            </BottomNavigation>
         );
     }
 }
@@ -156,10 +161,12 @@ class AppLayout extends Component {
 					<Drawer docked={true}>
 						<BioCard/>
 					</Drawer>
-                    <Content style={{background: "#fff", padding: 0, margin:0, minHeight:280}}>
-                        {/* {this.renderContent()} */}
-                        <Paper style={paperStyle} zDepth={3}/>
-                    </Content>
+                    <Layout style={{ padding: '30px 30px 30px 120px'}}>
+                        <Paper style={paperStyle} zDepth={3}>
+                            <ReactVisChart className="center-chart"/>
+                        </Paper>
+                    </Layout>
+                    <br/>
 					<BottomNav/>
 				</div>
 			</MuiThemeProvider>
