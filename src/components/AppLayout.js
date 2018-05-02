@@ -13,13 +13,13 @@ import AppBar from 'material-ui/AppBar';
 import Drawer from 'material-ui/Drawer';
 import { Card, CardActions, CardMedia, CardHeader, CardText } from 'material-ui/Card';
 // import Avatar from 'material-ui/Avatar';
-import {BottomNavigation, BottomNavigationItem} from 'material-ui/BottomNavigation';
+// import {BottomNavigation, BottomNavigationItem} from 'material-ui/BottomNavigation';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import Paper from 'material-ui/Paper';
 
 // Pulling icons from Ant because Material Icons don't import correctly
 import { Icon } from 'antd';
-import { Layout } from 'antd';
+import { Layout, Menu } from 'antd';
 
 const { Content } = Layout;
 
@@ -28,17 +28,12 @@ const style = {
 };
 
 const paperStyle = {
-    height: 800,
-    width: 1200,
-    marginLeft: 250,
-    textAlign: 'center',
-    display: 'inline-block',
+	height: 800,
+	width: 1200,
+	marginLeft: 250,
+	textAlign: 'center',
+	display: 'inline-block',
 };
-
-const bottomNavStyle = {
-    height: 20,
-    marginLeft: 100,
-}
 
 class BioCard extends Component {
 	render() {
@@ -54,7 +49,7 @@ class BioCard extends Component {
 				<CardText>Check out my page {<a target="_blank" rel="noopener noreferrer" href="https://viziblydiffrnt.github.io">https://viziblydiffrnt.github.io</a>} </CardText>
 				<CardActions>
 					<FloatingActionButton 
-                        mini={true}
+						mini={true}
 						style={style} 
 						href="https://twitter.com/ViziblyDiffrnt"
 						target="_blank"
@@ -89,85 +84,89 @@ class BioCard extends Component {
 	}
 }
 
-
-class BottomNav extends Component {
-
-    state = {
-        selectedIndex:0,
-    };
-
-    select = (index) => this.setState({
-        selectedIndex: index,
-    });
-
-
-    render() {
-        return(
-                <BottomNavigation selectedIndex={this.state.selectedIndex} style={bottomNavStyle}>
-                <BottomNavigationItem 
-                    label="Vizibly Diffrnt"
-                    icon={<Icon type="home"/>}  
-                    style={{fontSize: 24}}  
-                    onClick={()=> {
-                        this.select(0);
-                        // this.renderContent();
-                    }}
-                >
-                </BottomNavigationItem>
-                <BottomNavigationItem 
-                    label="React Vis"
-                    icon={<Icon type="line-chart"/>}    
-                    style={{fontSize: 24}}  
-                    onClick={()=> {
-                        this.select(1);
-                        // this.renderContent();
-                    }}
-                >
-                </BottomNavigationItem>
-                <BottomNavigationItem 
-                    label="Tableau"
-                    icon={<Icon type="dot-chart"/>}    
-                    style={{fontSize: 24}}  
-                    onClick={()=> {
-                        this.select(2);
-                        // this.renderContent();
-                    }}
-                >
-                </BottomNavigationItem>
-            </BottomNavigation>
-        );
-    }
-}
-
 class ReactLogo extends Component {
-    render() {
-        return(
-            <img src={logo} className="App-logo" alt="logo"/>
-        );
-    }
+	render() {
+		return(
+			<img src={logo} className="App-logo" alt="logo"/>
+		);
+	}
 }
 
 class AppLayout extends Component {
+
+	state = {
+        current: 'vizibly-diffrnt',
+    }
+
+    handleClick = (e) => {
+        console.log('click', e);
+
+        this.setState({
+            current: e.key,
+        });
+    }
+
+    selectContent() {
+        const AppContent = () => {
+            if (this.state.current.includes("vizibly-diffrnt")) {
+                console.log(this.state.current);
+                return(<iframe title="vizibly-diffrnt" src="https://viziblydiffrnt.github.io/about/" width="1200" height="800"/>
+                );
+            } else if (this.state.current.includes("react-vis")) {
+                console.log(this.state.current);
+                return(<ReactVisChart/>
+                );
+            } else if (this.state.current.includes("tableau-vis")) {
+                console.log(this.state.current);
+                return(<div>Tableau Content Goes Here</div>
+                // return(<iframe title="tableau" src="https://public.tableau.com/views/NYYSeasons3/NYYSeasons?:showVizHome=no&:embed=true" width="800" height="800"/>
+                );
+            }
+        }
+        return(AppContent());
+    }
 
 	render() {
 		return(
 			<MuiThemeProvider muiTheme={getMuiTheme(app_theme)}>
 				<div>
 					<AppBar
-                        title={<p>{<ReactLogo/>}Experimenting with React.js</p>}
-                        showMenuIconButton={false}
+						title={<p>{<ReactLogo/>}Experimenting with React.js</p>}
+						showMenuIconButton={false}
                         
 					/>
 					<Drawer docked={true}>
 						<BioCard/>
 					</Drawer>
-                    <Layout style={{ padding: '30px 30px 30px 120px'}}>
-                        <Paper style={paperStyle} zDepth={3}>
-                            <ReactVisChart className="center-chart"/>
-                        </Paper>
-                    </Layout>
-                    <br/>
-					<BottomNav/>
+					<Layout style={{ padding: '30px 30px 30px 120px'}}>
+						<Paper style={paperStyle} zDepth={3}>
+							{/* <ReactVisChart className="center-chart"/> */}
+							{this.selectContent()}
+						</Paper>
+					</Layout>
+					<br/>
+					<div>
+					<Menu
+						theme="light"
+						mode="horizontal"
+						defaultSelectedKeys={['3']}
+						style={{ lineHeight: '24px', marginLeft: 725 }}
+						onClick={this.handleClick}
+						selectedKeys={[this.state.current]}
+					>
+						<Menu.Item key="vizibly-diffrnt">
+						<Icon type="code" style={{fontSize: 28}}/>Vizibly Diffrnt
+						</Menu.Item>
+						<Menu.Item key="react-vis">
+						<Icon type="area-chart" style={{fontSize: 28}}/>
+						React-Vis
+						</Menu.Item>
+						<Menu.Item key="tableau-vis">
+						<Icon type="dot-chart" style={{fontSize: 28}}/>
+						Tableau JS
+						</Menu.Item>
+					</Menu>
+						</div>
 				</div>
 			</MuiThemeProvider>
 		);
