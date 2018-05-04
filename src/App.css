@@ -58,3 +58,13 @@
   height: 500px;
   /* border-radius: 3px; */
 }
+
+.outer-div{
+  padding: 135px;
+}
+
+.inner-div{
+  margin: auto;
+  height: 600px;
+  width: 600px;
+}

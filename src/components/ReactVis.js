@@ -1,5 +1,7 @@
-import React, { Component } from "react";
-import { XYPlot, LineSeries, VerticalGridLines, XAxis, YAxis, HorizontalGridLines } from 'react-vis';
+import React, { Component } from 'react'
+import '../../node_modules/react-vis/dist/style.css';
+import { XYPlot, VerticalGridLines, XAxis, YAxis, HorizontalGridLines } from 'react-vis';
+import { LineSeries, HorizontalBarSeries, VerticalBarSeries } from 'react-vis';
 
 class ReactVisChart extends Component{
 	render() {
@@ -18,14 +20,16 @@ class ReactVisChart extends Component{
 		];
 
 		return(
-			<div>
-				<XYPlot height={500} width={500}>
-					<VerticalGridLines />
-					<HorizontalGridLines />
-					<XAxis/>
-					<YAxis/>
-					<LineSeries data={data}/>
-				</XYPlot>
+			<div className="outer-div">
+				<div className="inner-div">
+					<XYPlot height={600} width={600}>
+						<LineSeries data={data}/>
+						{/* <VerticalGridLines /> */}
+						{/* <HorizontalGridLines /> */}
+						<XAxis/>
+						<YAxis/>
+					</XYPlot>
+				</div>
 			</div>
 		);
 	}
