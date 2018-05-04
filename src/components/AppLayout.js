@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from '../logo.svg';
 
 // Theme Components from Material UI
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -7,17 +6,14 @@ import app_theme from './app_theme';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
 // JS Based Data Viz Examples
-import ReactVisChart from '../components/ReactVis';
-import SemioticVisChart from '../components/semioticVis';
-import NivoBar from '../components/nivoBar';
 import Victory from '../components/Victory';
+import TableauTest from '../components/tableauReact';
 
 // Layout Components from Material UIz
-import AppBar from 'material-ui/AppBar';
+// import AppBar from 'material-ui/AppBar';
 import Drawer from 'material-ui/Drawer';
+import Divider from 'material-ui/Divider';
 import { Card, CardActions, CardMedia, CardHeader, CardText } from 'material-ui/Card';
-// import Avatar from 'material-ui/Avatar';
-// import {BottomNavigation, BottomNavigationItem} from 'material-ui/BottomNavigation';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import Paper from 'material-ui/Paper';
 
@@ -25,7 +21,6 @@ import Paper from 'material-ui/Paper';
 import { Icon } from 'antd';
 import { Layout, Menu } from 'antd';
 
-const { Content } = Layout;
 
 const style = {
 	marginRight: 20,
@@ -51,7 +46,7 @@ class BioCard extends Component {
 					avatar="https://viziblydiffrnt.github.io/assets/images/about.JPG">
 				</CardHeader>
 				<CardText>Check out my page {<a target="_blank" rel="noopener noreferrer" href="https://viziblydiffrnt.github.io">https://viziblydiffrnt.github.io</a>} </CardText>
-				<CardActions>
+				<CardActions style={{padding: "15px 0px"}}>
 					<FloatingActionButton 
 						mini={true}
 						style={style} 
@@ -78,20 +73,8 @@ class BioCard extends Component {
 						backgroundColor={"#fffff"}>
 						<Icon type="linkedin" style={{color:'#0077B5'}}/>
 					</FloatingActionButton>
-
-					{/* <Icon type="twitter" style={{color:'#0084b4'}}/>
-					<Icon type="github" style={{color:'#000'}}/>
-					<Icon type="linkedin" style={{color:'#0077B5'}}/> */}
 				</CardActions>
 			</Card>
-		);
-	}
-}
-
-class ReactLogo extends Component {
-	render() {
-		return(
-			<img src={logo} className="App-logo" alt="logo"/>
 		);
 	}
 }
@@ -119,15 +102,12 @@ class AppLayout extends Component {
             } else if (this.state.current.includes("js-vis")) {
                 console.log(this.state.current);
                 return(
-					// <ReactVisChart/>
-					// <SemioticVisChart/>
-					// <NivoBar/>
-						<Victory/>
+					<Victory/>
                 );
             } else if (this.state.current.includes("tableau-vis")) {
                 console.log(this.state.current);
-                return(<div>Tableau Content Goes Here</div>
-                // return(<iframe title="tableau" src="https://public.tableau.com/views/NYYSeasons3/NYYSeasons?:showVizHome=no&:embed=true" width="800" height="800"/>
+                return(
+					<TableauTest/>
                 );
             }
         }
@@ -138,43 +118,42 @@ class AppLayout extends Component {
 		return(
 			<MuiThemeProvider muiTheme={getMuiTheme(app_theme)}>
 				<div>
-					<AppBar
+					{/* <AppBar
 						title={<p>{<ReactLogo/>}Experimenting with React.js</p>}
 						showMenuIconButton={false}
-                        
-					/>
+					/> */}
 					<Drawer docked={true}>
 						<BioCard/>
+						<Divider/>
+						<br/>
+						<Menu
+							theme="light"
+							mode="vertical-right"
+							// inlineIndent={0}
+							defaultSelectedKeys={['3']}
+							style={{ lineHeight: '24px', textAlign: 'left'}}
+							onClick={this.handleClick}
+							selectedKeys={[this.state.current]}
+						>
+							<Menu.Item key="vizibly-diffrnt">
+								<Icon type="code" style={{fontSize: 28}}/>
+								Vizibly Diffrnt
+							</Menu.Item>
+							<Menu.Item key="js-vis">
+								<Icon type="area-chart" style={{fontSize: 28}}/>
+								Javascript Visualization
+							</Menu.Item>
+							<Menu.Item key="tableau-vis">
+								<Icon type="dot-chart" style={{fontSize: 28}}/>
+								Tableau Embedded
+							</Menu.Item>
+						</Menu>
 					</Drawer>
 					<Layout style={{ padding: '30px 30px 30px 120px'}}>
 						<Paper style={paperStyle} zDepth={3}>
-							{/* <ReactVisChart className="center-chart"/> */}
 							{this.selectContent()}
 						</Paper>
 					</Layout>
-					<br/>
-					<div>
-					<Menu
-						theme="light"
-						mode="horizontal"
-						defaultSelectedKeys={['3']}
-						style={{ lineHeight: '24px', marginLeft: 725 }}
-						onClick={this.handleClick}
-						selectedKeys={[this.state.current]}
-					>
-						<Menu.Item key="vizibly-diffrnt">
-						<Icon type="code" style={{fontSize: 28}}/>Vizibly Diffrnt
-						</Menu.Item>
-						<Menu.Item key="js-vis">
-						<Icon type="area-chart" style={{fontSize: 28}}/>
-						JS-Vis
-						</Menu.Item>
-						<Menu.Item key="tableau-vis">
-						<Icon type="dot-chart" style={{fontSize: 28}}/>
-						Tableau JS
-						</Menu.Item>
-					</Menu>
-						</div>
 				</div>
 			</MuiThemeProvider>
 		);

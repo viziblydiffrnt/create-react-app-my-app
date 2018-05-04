@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { VictoryBar, VictoryChart, VictoryAxis, VictoryTheme, VictoryStack, VictoryTooltip } from 'victory';
+import { VictoryBar, VictoryChart, VictoryAxis, VictoryTheme, VictoryStack, VictoryTooltip, VictoryLabel } from 'victory';
 import { Button } from 'antd';
 
 
@@ -54,15 +54,18 @@ export default class Victory extends Component {
 			<div className='outer-div'>
 				<div className='inner-div'>
 					<VictoryChart 
-						theme={VictoryTheme.material}
+                        theme={VictoryTheme.material}
+                        horizontal={this.state.isHorizontal}
 						domainPadding={20}
 					>
+						<VictoryLabel text="Built Using Victory" x={175} y={30} textAnchor="middle"/>
 						<VictoryAxis
-							tickValues={[1,2,3,4]}
-							tickFormat={["Quarter 1", "Quarter 2", "Quarter 3", "Quarter 4"]}
+                            tickValues={[1,2,3,4]}
+                            dependentAxis={this.state.isHorizontal}
+							tickFormat={["Q1", "Q2", "Q3", "Q4"]}
 						/>
 						<VictoryAxis
-							dependentAxis
+							dependentAxis={!this.state.isHorizontal}
 							tickFormat={(x) => (`$${x / 1000}k`)}
 						/>
 						<VictoryStack
@@ -74,10 +77,10 @@ export default class Victory extends Component {
                                 y="earnings"
                                 horizontal={this.state.isHorizontal}
                                 labelComponent={<VictoryTooltip/>}
-								labels={(d) => (`Q${d.x}: $${d.y}`)}
+								labels={(d) => (`Q${d.x} 2012: $${d.y}`)}
 								animate={{
-									duration: 2000,
-									onLoad: {duration: 1000}
+									duration: 20,
+									onLoad: {duration: 10}
 								}}
 							/>
 							<VictoryBar
@@ -86,10 +89,10 @@ export default class Victory extends Component {
                                 y="earnings"
                                 horizontal={this.state.isHorizontal}
 								labelComponent={<VictoryTooltip/>}
-								labels={(d) => (`Q${d.x}: $${d.y}`)}
+								labels={(d) => (`Q${d.x} 2013: $${d.y}`)}
 								animate={{
-									duration: 2000,
-									onLoad: {duration: 1000}
+									duration: 20,
+									onLoad: {duration: 10}
 								}}
 							/>
 							<VictoryBar
@@ -98,10 +101,10 @@ export default class Victory extends Component {
                                 y="earnings"
                                 horizontal={this.state.isHorizontal}
 								labelComponent={<VictoryTooltip/>}
-								labels={(d) => (`Q${d.x}: $${d.y}`)}
+								labels={(d) => (`Q${d.x} 2014: $${d.y}`)}
 								animate={{
-									duration: 2000,
-									onLoad: {duration: 1000}
+									duration: 20,
+									onLoad: {duration: 10}
 								}}
 							/>
 							<VictoryBar
@@ -110,10 +113,10 @@ export default class Victory extends Component {
                                 y="earnings"
                                 horizontal={this.state.isHorizontal}
 								labelComponent={<VictoryTooltip/>}
-								labels={(d) => (`Q${d.x}: $${d.y}`)}
+								labels={(d) => (`Q${d.x} 2015: $${d.y}`)}
 								animate={{
-									duration: 2000,
-									onLoad: {duration: 1000}
+									duration: 20,
+									onLoad: {duration: 10}
 								}}
 							/>
 						</VictoryStack>
@@ -123,4 +126,4 @@ export default class Victory extends Component {
 			</div>
 		);
 	}
-}
+}   
