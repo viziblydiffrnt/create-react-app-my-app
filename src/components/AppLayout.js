@@ -6,7 +6,11 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import app_theme from './app_theme';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
+// JS Based Data Viz Examples
 import ReactVisChart from '../components/ReactVis';
+import SemioticVisChart from '../components/semioticVis';
+import NivoBar from '../components/nivoBar';
+import Victory from '../components/Victory';
 
 // Layout Components from Material UIz
 import AppBar from 'material-ui/AppBar';
@@ -112,9 +116,13 @@ class AppLayout extends Component {
                 console.log(this.state.current);
                 return(<iframe title="vizibly-diffrnt" src="https://viziblydiffrnt.github.io/about/" width="1200" height="800"/>
                 );
-            } else if (this.state.current.includes("react-vis")) {
+            } else if (this.state.current.includes("js-vis")) {
                 console.log(this.state.current);
-                return(<ReactVisChart/>
+                return(
+					// <ReactVisChart/>
+					// <SemioticVisChart/>
+					// <NivoBar/>
+						<Victory/>
                 );
             } else if (this.state.current.includes("tableau-vis")) {
                 console.log(this.state.current);
@@ -157,9 +165,9 @@ class AppLayout extends Component {
 						<Menu.Item key="vizibly-diffrnt">
 						<Icon type="code" style={{fontSize: 28}}/>Vizibly Diffrnt
 						</Menu.Item>
-						<Menu.Item key="react-vis">
+						<Menu.Item key="js-vis">
 						<Icon type="area-chart" style={{fontSize: 28}}/>
-						React-Vis
+						JS-Vis
 						</Menu.Item>
 						<Menu.Item key="tableau-vis">
 						<Icon type="dot-chart" style={{fontSize: 28}}/>
