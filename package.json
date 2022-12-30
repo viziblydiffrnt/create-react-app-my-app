@@ -7,7 +7,7 @@
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
     "react-scripts": "1.1.4",
-    "semiotic": "^1.10.2",
+    "semiotic": "^1.20.6",
     "tableau-api": "^2.2.2",
     "victory": "^0.26.0"
   },
